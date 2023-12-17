@@ -1,3 +1,3 @@
-import 'package:split_up/src/app.dart';
+import 'package:split_up/src/init.dart';
 
-main() async => await runSplitUpApp();
+void main() async => await runSplitUpApp();
