@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/widgets.dart';
+
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
 
@@ -10,8 +12,14 @@ class RootScreen extends StatefulWidget {
 class _RootScreenState extends State<RootScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('app initialized')),
+    return const Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        Scaffold(
+          body: Center(child: Text("hello world!")),
+        ),
+        SplitUpNavBar()
+      ],
     );
   }
 }

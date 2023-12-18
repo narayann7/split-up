@@ -6,8 +6,9 @@ import 'package:split_up/src/app.dart';
 import 'utils/utils.dart';
 
 Future<void> runSplitUpApp() async =>
-    await init().then((value) => runApp(const SplitUpApp()));
+    await init().then((_) => runApp(const SplitUpApp()));
 
+// init : pre setup for the app.
 Future<void> init() async {
   // makes sure that you have an instance of the WidgetsBinding,
   // which is required to use platform channels to call the native code.
