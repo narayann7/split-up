@@ -42,10 +42,10 @@ class DefaultFirebaseOptions {
   }
 
   static FirebaseOptions android = FirebaseOptions(
-    apiKey: Secrets.FIREBASE_API_KEY,
-    appId: Secrets.FIREBASE_APP_ID,
-    messagingSenderId: Secrets.FIREBASE_MESSAGING_SENDER_ID,
-    projectId: Secrets.FIREBASE_PROJECT_ID,
-    storageBucket: Secrets.FIREBASE_STORAGE_BUCKET,
+    apiKey: Secrets.firebaseApiKey,
+    appId: Secrets.firebaseAppId,
+    messagingSenderId: Secrets.firebaseMessagingSenderId,
+    projectId: Secrets.firebaseProjectId,
+    storageBucket: Secrets.firebaseStorageBucket,
   );
 }

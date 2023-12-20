@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../blocs/blocs.dart';
 
 class SplitUpNavBar extends StatefulWidget {
   const SplitUpNavBar({Key? key}) : super(key: key);
@@ -8,21 +11,28 @@ class SplitUpNavBar extends StatefulWidget {
 }
 
 class _SplitUpNavBarState extends State<SplitUpNavBar> {
-  final PageController _controller = PageController(viewportFraction: 0.2);
+  final _controller = PageController(viewportFraction: 0.2, initialPage: 1);
 
-  final icons = [
-    Icons.home,
-    Icons.search,
-    Icons.add,
-  ];
+  final icons = [Icons.home, Icons.search, Icons.add];
+  @override
+  void initState() {
+    super.initState();
+    //to set the initial page to the middle one
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey[200],
-      height: 100, // Card Height
+      height: 100,
       width: MediaQuery.of(context).size.width,
       child: PageView.builder(
-        itemCount: icons.length,
+        itemCount: kNavBarItemLength,
+        onPageChanged: (index) {
+          context.read<NavBarCubit>().changeNavBarIndex(index);
+        },
+        physics: const BouncingScrollPhysics(),
         controller: _controller,
         itemBuilder: (context, index) {
           return ListenableBuilder(
@@ -32,12 +42,20 @@ class _SplitUpNavBarState extends State<SplitUpNavBar> {
               if (_controller.position.hasContentDimensions) {
                 factor = 1 - (_controller.page! - index).abs();
               }
-              //icons
-              print('logx$factor');
-              return Icon(
-                icons[index],
-                size: (30 + 40 * factor).clamp(30.0, 70.0),
-                color: Colors.black,
+
+              return InkWell(
+                onTap: () {
+                  _controller.animateToPage(
+                    index,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                  );
+                },
+                child: Icon(
+                  icons[index],
+                  size: (30 + 40 * factor).clamp(30.0, 70.0),
+                  color: Colors.black,
+                ),
               );
             },
           );

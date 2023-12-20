@@ -1,12 +1,12 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:split_up/src/app.dart';
-
+import 'blocs/blocs.dart';
 import 'utils/utils.dart';
 
 Future<void> runSplitUpApp() async =>
-    await init().then((_) => runApp(const SplitUpApp()));
+    await init().then((_) => runApp(BlocInit(child: const SplitUpApp())));
 
 // init : pre setup for the app.
 Future<void> init() async {
