@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/blocs.dart';
@@ -19,6 +20,8 @@ class _SplitUpNavBarState extends State<SplitUpNavBar> {
     super.initState();
     //to set the initial page to the middle one
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    //add Vibration.vibrate(duration: 1000); at main page to test
+    // _controller.
   }
 
   @override
@@ -30,6 +33,7 @@ class _SplitUpNavBarState extends State<SplitUpNavBar> {
       child: PageView.builder(
         itemCount: kNavBarItemLength,
         onPageChanged: (index) {
+          HapticFeedback.heavyImpact();
           context.read<NavBarCubit>().changeNavBarIndex(index);
         },
         physics: const BouncingScrollPhysics(),
